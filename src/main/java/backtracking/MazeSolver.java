@@ -7,9 +7,6 @@ public class MazeSolver {
     public static boolean solveMaze(int[][] maze, int[][] solution, int x, int y) {
         int rows = maze.length;
         int cols = maze[0].length;
-        System.out.println("*********************");
-        printSolution(solution);
-        System.out.println("----------------------");
         // Base case: if we reached the destination (bottom - right corner) and it is walkable
         if (x == rows -1 && y == cols - 1 && maze[x][y] == 1){
             solution[x][y] = 1;     // Mark the destination as part of the solution
@@ -21,11 +18,10 @@ public class MazeSolver {
             solution[x][y] = 1;     // Mark the cell as part of the solution
 
             // Try moving in all four direction: left, right, up, down
-            if (solveMaze(maze, solution, x, y - 1)) return true;   // move left
             if (solveMaze(maze, solution, x, y + 1)) return true;   // move right
-            if (solveMaze(maze, solution, x - 1, y)) return true;   // move up
             if (solveMaze(maze, solution, x + 1, y)) return true;   // move down
-
+            if (solveMaze(maze, solution, x - 1, y)) return true;   // move up
+            if (solveMaze(maze, solution, x, y - 1)) return true;   // move left
             solution[x][y] = 0;     // Backtrack if none of the moves work
         }
         return false;
